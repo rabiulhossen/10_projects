@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <link rel="stylesheet" href="style.css" />
+   </head>
+   <body>
+      <div class="container">
+         <div class="header">
+            password Checker
+            <form action="/">
+               <input
+                  type="password"
+                  name="password"
+                  id="input"
+                  placeholder="enter a password"
+                  onkeyup="run()"
+               />
+               <span class="showed" onclick="showed()">show</span>
+               <div class="message"></div>
+            </form>
+         </div>
+      </div>
+      <script>
+         const input = document.querySelector('#input');
+         const message = document.querySelector('.message');
+         const show = document.querySelector('.showed');
+         let weakPassword = /[a-z]/;
+         let mediumPassword = /\d+/;
+         let strongPassword = /.[!@#$%*?|_=_(,)]/;
+
+         const run = () => {
+            if (input.value !== '') {
+               message.textContent = 'your password is weak';
+               show.style.display = 'block';
+            }
+            if (
+               (input.value.length <= 3 && input.value.match(weakPassword)) ||
+               input.value.match(mediumPassword) ||
+               input.value.match(strongPassword)
+            ) {
+               message.textContent = 'your password is too weak';
+            } else if (
+               (input.value.length >= 6 && input.value.match(weakPassword)) ||
+               input.value.match(mediumPassword) ||
+               input.value.match(strongPassword)
+            ) {
+               message.textContent = 'your password is strong';
+            }
+         };
+          function showed () {
+            if (input.type == 'password') {
+               input.type = 'text';
+               show.textContent = 'hide';
+               show.style.cursor="pointer"
+            } else {
+               input.type = 'password';
+               show.textContent = 'show';
+            }
+         };
+      </script>
+   </body>
+</html>
